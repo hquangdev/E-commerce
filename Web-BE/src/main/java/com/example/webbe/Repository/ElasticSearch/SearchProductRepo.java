@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SearchProductRepo extends ElasticsearchRepository<ProductSearch, String> {
 
-    //xóa lan 2
+    //xóa lan 3
     void delete(Product product);
 }
