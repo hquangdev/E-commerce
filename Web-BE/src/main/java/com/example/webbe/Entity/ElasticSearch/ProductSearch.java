@@ -2,16 +2,21 @@ package com.example.webbe.Entity.ElasticSearch;
 
 
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Document(indexName = "product")
-public class Product {
+public class ProductSearch {
     @Id
     private String id;
 
@@ -21,6 +26,7 @@ public class Product {
     @Field(type = FieldType.Text)
     private String description;
 
+    @Getter
     @Field(type = FieldType.Text)
     private String image;
 
@@ -38,4 +44,8 @@ public class Product {
 
     @Field(type = FieldType.Date)
     private LocalDateTime updatedAt;
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

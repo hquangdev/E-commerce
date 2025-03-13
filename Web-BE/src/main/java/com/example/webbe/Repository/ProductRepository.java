@@ -17,7 +17,7 @@ SELECT p FROM product p LEFT JOIN FETCH p.category WHERE p.id = :id""")
     Optional<Product> findProductById(@Param("id") String id);
 
     @Query("""
-                 SELECT p FROM product p LEFT JOIN FETCH p.category
+                SELECT p FROM product p LEFT JOIN FETCH p.category
     """)
     List<Product> findAllProducts();
 }

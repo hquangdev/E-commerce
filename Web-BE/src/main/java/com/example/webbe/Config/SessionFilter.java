@@ -36,7 +36,7 @@ public class SessionFilter extends OncePerRequestFilter {
             Cookie sessionCookie = new Cookie("sessionId", sessionId);
             sessionCookie.setPath("/");
             sessionCookie.setHttpOnly(true); // Không cho frontend truy cập (bảo mật hơn)
-            sessionCookie.setMaxAge(7 * 24 * 60 * 60); // Cookie tồn tại 7 ngày
+            sessionCookie.setMaxAge(7 * 24 * 60 * 60);
             response.addCookie(sessionCookie);
         }
 

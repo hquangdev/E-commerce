@@ -4,10 +4,12 @@ import com.example.webbe.DTO.Request.ProductRequest;
 import com.example.webbe.DTO.Response.ProductResponse;
 import com.example.webbe.DTO.ResponseDto;
 import com.example.webbe.Entity.Category;
+import com.example.webbe.Entity.ElasticSearch.ProductSearch;
 import com.example.webbe.Entity.Product;
 import com.example.webbe.Entity.ProductCategory;
 import com.example.webbe.Mapper.ProductMapper;
 import com.example.webbe.Repository.CategoryRepository;
+import com.example.webbe.Repository.ElasticSearch.SearchProductRepo;
 import com.example.webbe.Repository.ProductCategoryRepository;
 import com.example.webbe.Repository.ProductRepository;
 import com.example.webbe.exception.EnumCode;
@@ -29,6 +31,7 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
     private final ProductMapper productMapper;
     private final ImageService imageService;
+    private final SearchProductRepo searchProductRepo;
 
     private static final String image = "F:/web_edit/Web-BE/src/main/resources/static/images/product/";
 
@@ -46,6 +49,8 @@ public class ProductService {
 
             Product saveProduct = productRepository.save(product);
 
+            ProductSearch productSearch = productMapper.toProductSearch(saveProduct);
+            searchProductRepo.save(productSearch);
             ProductResponse productResponse = productMapper.productResponse(saveProduct);
 
             return ResponseBuilder.okResponse(
@@ -81,7 +86,10 @@ public class ProductService {
                         .orElseThrow(() -> new RuntimeException("Không tìm thấy danh mục với ID: " + productRequest.getCategoryId()));
                 product.setCategory(category);
             }
-            productRepository.save(product);
+            Product saveProduct = productRepository.save(product);
+
+            ProductSearch productSearch = productMapper.toProductSearch(saveProduct);
+            searchProductRepo.save(productSearch);
             return ResponseBuilder.okResponse(EnumCode.SUCCESSFULLY, product);
 
         }catch (Exception e){
