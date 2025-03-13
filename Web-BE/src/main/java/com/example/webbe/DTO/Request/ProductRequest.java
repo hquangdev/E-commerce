@@ -18,4 +18,5 @@ public class ProductRequest {
     private Double price;
     private int status;
     private String categoryId;
+    private int quantity;
 }
