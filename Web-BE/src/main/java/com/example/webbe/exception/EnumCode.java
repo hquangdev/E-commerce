@@ -38,6 +38,12 @@ public enum EnumCode {
     GET_CART_FAILED(2012, "Hiện thị giỏ hàng thất bại", HttpStatus.BAD_REQUEST),
     ADD_CART_FAILED(2013, "Thêm sản phẩm vào giỏ hàng thất bại", HttpStatus.BAD_REQUEST),
     EDIT_CART_FAILED(2014, "Sửa giỏ hàng thất bại", HttpStatus.BAD_REQUEST),
+    ADD_CART_SUCCESSFULLY(2015,"Bạn đã thêm sản phẩm vào giỏ hàng thành công", HttpStatus.OK),
+
+
+    //Tìm kiếm
+    NO_CONTENT(2016, "Không tìm thấy nội dung !", HttpStatus.BAD_REQUEST),
+    SEARCH_SUCCESSFULLY(2017,"Đã tìm thấy sản phẩm bạn mong muốn",HttpStatus.OK),
 
     //authentication
     AUTHENTICATED(1010, " có token", HttpStatus.NO_CONTENT),

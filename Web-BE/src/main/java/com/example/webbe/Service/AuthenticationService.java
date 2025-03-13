@@ -15,6 +15,7 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -34,8 +35,9 @@ public class AuthenticationService {
     private final AuthenticationRepo authenticationRepo;
 
     protected static final String SINGER_KEY = "LDzDIQeFNWXeWjG/yQ3yQz0cNJY2QAx08t5vyu7/E1ZaYZNsaSzaQBQ/nhWH591f";
+    private final CartService cartService;
 
-    public ResponseEntity<ResponseDto<Object>> Login(AuthenticationRequest authenticationRequest) {
+    public ResponseEntity<ResponseDto<Object>> Login(AuthenticationRequest authenticationRequest, HttpServletRequest request) {
         try {
             var user = authenticationRepo.findByName(authenticationRequest.getName())
                     .orElseThrow(() -> new AppException(EnumCode.USER_NOT_EXITED));
@@ -49,7 +51,10 @@ public class AuthenticationService {
 
             var token = generateToken(user);
 
-            // Trả về phản hồi thành công
+            String sessionId = request.getSession().getId();
+
+            cartService.mergeGuestCartToUserCart(sessionId, user.getId());
+
             return ResponseBuilder.okResponse(
                     EnumCode.LOGIN_SUCC,
                     AuthenticationResponse.builder()

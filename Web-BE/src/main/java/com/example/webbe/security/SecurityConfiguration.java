@@ -29,7 +29,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecurityConfiguration {
     protected static final String SINGER_KEY = "LDzDIQeFNWXeWjG/yQ3yQz0cNJY2QAx08t5vyu7/E1ZaYZNsaSzaQBQ/nhWH591f";
 
-    private final String[] PUBLIC_ENDPOINTS = {"/user","/cart/**", "/auth", "/auth/introspect","/uploads/**"};
+    private final String[] PUBLIC_ENDPOINTS = {"/user","/home/**", "/auth/**", "/auth/introspect","/uploads/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{

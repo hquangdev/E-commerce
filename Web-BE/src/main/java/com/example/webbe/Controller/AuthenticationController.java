@@ -6,6 +6,7 @@ import com.example.webbe.DTO.Response.IntrospectResponse;
 import com.example.webbe.DTO.ResponseDto;
 import com.example.webbe.Service.AuthenticationService;
 import com.nimbusds.jose.JOSEException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +24,8 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping
-    public ResponseEntity<ResponseDto<Object>> Login(@RequestBody AuthenticationRequest authenticationRequest){
-         return authenticationService.Login(authenticationRequest);
+    public ResponseEntity<ResponseDto<Object>> Login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletRequest request){
+         return authenticationService.Login(authenticationRequest, request);
     }
 
     @PostMapping("/introspect")

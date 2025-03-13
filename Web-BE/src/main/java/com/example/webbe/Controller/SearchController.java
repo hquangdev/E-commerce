@@ -19,8 +19,8 @@ public class SearchController {
     private final SearchService searchService;
 
     //search product
-//    @GetMapping
-//    public ResponseEntity<ResponseDto<Object>> searchProduct(@RequestParam String keyword){
-//       return searchService.getProduct(keyword);
-//    }
+    @GetMapping
+    public ResponseEntity<ResponseDto<Object>> searchProduct(@RequestParam String keyword){
+       return searchService.getProduct(keyword);
+    }
 }
