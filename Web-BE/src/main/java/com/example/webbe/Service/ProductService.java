@@ -102,12 +102,13 @@ public class ProductService {
     public ResponseEntity<ResponseDto<Object>> deleteProduct(String id){
         Product product = findProductById(id);
         productRepository.delete(product);
+
+        searchProductRepo.delete(product);
         return ResponseBuilder.okResponse(EnumCode.DELETE_SUC, null);
     }
 
     public ResponseEntity<ResponseDto<Object>> getProduct(String id){
         Optional<Product> product = productRepository.findProductById(id);
-
         return ResponseBuilder.okResponse(EnumCode.SUCCESSFULLY, product);
     }
 
